@@ -1,0 +1,8 @@
+snmpfs: 0.1
+nodes:
+/test/hiho/file
+/test/file2
+/foo/interfaces/eth0
+/foo/interfaces/wlan0
+EOF
+<html><body><br><hr>snmpfsd</body></html>

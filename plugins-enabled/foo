@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ "$1" == "/" ]
+then
+echo "nodes:"
+echo "interfaces/eth0"
+echo "interfaces/wlan0"
+echo "/"
+echo " "
+echo " #"
+echo "#  fio"
+echo "EOF"
+echo "huhu/p1p0"
+
+else
+echo "hiho"
+fi

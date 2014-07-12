@@ -3,25 +3,35 @@
 # snmpfsd
 # simple network management for stupids (daemon)
 # 
+# dev-start: 17.4.2014
 # Created by Florian Schiessl <florian at floriware.de>
 # Licensed under the MIT License
 # 
+# Generate Certificates:
+# openssl req -new -x509 -newkey rsa:1024 -days 3650 -keyout server-key.pem -out server-cert.pem
+# openssl rsa -in server-key.pem -out server-key.pem
+#
 
 use strict;
 use HTTP::Daemon::SSL;
 use HTTP::Status;
 use Data::Dumper;
 
-my $plugindir = "./plugins";
+my $plugindir = "./plugins-enabled";
 
 my @files;
 &readdir();
 
 $SIG{CHLD} = 'IGNORE';
-my $d = HTTP::Daemon->new(
-	LocalPort => 2323,
-	Reuse => 1
-	) || die;
+
+my $d = HTTP::Daemon::SSL->new(
+	LocalAddr => '0.0.0.0',
+	LocalPort => 3673,
+	Reuse => 1,
+	SSL_cert_file => "./certs/server-cert.pem",
+	SSL_key_file => "./certs/server-key.pem"
+) || die;
+
 print "Please contact me at: <URL:", $d->url, ">\n";
 while (1)
 {
